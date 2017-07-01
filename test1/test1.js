@@ -63,7 +63,7 @@ function process1(){
 
         for(var i=0; i<3; i++){
         var res=myContract.getMatch.call(i, 2000000,{from: web3.eth.accounts[0]});
-        answers[i]=parseInt(res[0]);
+        answers[i]=new Combination (parseInt(res[0], parseInt(res[1]), res[2]));
         console.log("answer from call: " + res);
         console.log("the answers array: " + answers);
         //console.log("i= " +res );
@@ -148,7 +148,7 @@ function matchingAlgo(number){
 
 
 
-function combination(h, s, a){
+function Combination(h, s, a){
   this.hardware=h;
   this.software=s;
   this.address=a;
@@ -173,7 +173,7 @@ function merge(left, right)
     var result = [];
 
     while (left.length && right.length) {
-        if (left[0] <= right[0]) {
+        if (left[0].hardware <= right[0].hardware) {
             result.push(left.shift());
         } else {
             result.push(right.shift());
