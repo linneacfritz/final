@@ -83,6 +83,8 @@ function process1(k){
 
 
 function process2(){
+
+  
   var asking = myContract.asking({}, {fromBlock: 'latest', toBlock: 'latest'});
   asking.watch((error, eventResult) => {
     if (error)
