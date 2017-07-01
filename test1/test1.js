@@ -91,11 +91,13 @@ function process2(){
     console.log('Error: ' + error);
     else{
       console.log('myEvent: ' + JSON.stringify(eventResult) + '\n');
+/*k is set to the node that client 1 is asking about*/
       k = eventResult.args.q;
       console.log("\n Current block: " + currentBlock2 + " blocknumber: " + eventResult.blockNumber + '\n');
       if(currentBlock2!=eventResult.blockNumber){
         currentBlock2=eventResult.blockNumber;
-        k=Math.floor(Math.random() * (10 - 1 + 1)) + 1;        //k++;
+        //k=Math.floor(Math.random() * (10 - 1 + 1)) + 1;        //k++;
+        k=matchingAlgo(k)
           myContract.response(k, 2000000, {from: web3.eth.accounts[0]});
         }
         else {
@@ -168,20 +170,21 @@ function table(id, sheet_number){
 
 function matchingAlgo(number){
   var answer1 = table(number, 0);
-  console.log("answer1:" + answer1);
-  var answer2=0;
+  //console.log("answer1:" + answer1);
+  //var answer2=0;
 
-  if (answer1!=0){
-    answer2=table(answer1, 1);
-  }
+  //if (answer1!=0){
+    //answer2=table(answer1, 1);
+  //}
 
-  if (answer2!=0){
-    console.log("answer 1: " + answer1 + " and answer 2: " + answer2);
-    node_exists=true;
-    var answers = [answer1, answer2];
-    return answers;
-  }
-  else console.log("that node does not exist!");
+  //if (answer2!=0){
+    //console.log("answer 1: " + answer1 + " and answer 2: " + answer2);
+    //node_exists=true;
+    //var answers = [answer1, answer2];
+    //return answers;
+    return answer1;
+  //}
+  //else console.log("that node does not exist!");
 };
 
 
