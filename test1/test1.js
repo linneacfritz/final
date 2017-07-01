@@ -47,21 +47,21 @@ function startProgram(clientNumber){
   }
 }
 
-function process1(k){
-  myContract.query(k, 2000000, {from: web3.eth.accounts[0]});
+function process1(){
+  myContract.query(0, 2000000, {from: web3.eth.accounts[0]});
   var responding = myContract.responding({}, {fromBlock: 'latest', toBlock: 'latest'});
   responding.watch((error, eventResult) => {
     if (error)
     console.log('Error: ' + error);
     else{
       console.log('myEvent: ' + JSON.stringify(eventResult));
-      k = eventResult.args.r;
+      //k = eventResult.args.r;
       var answers=[];
       console.log("\n Current block: " + currentBlock1 + " blocknumber: " + eventResult.blockNumber + '\n');
       if(currentBlock1!=eventResult.blockNumber){
 
         currentBlock1=eventResult.blockNumber;
-        k++;
+        //k++;
 
         for(var i=0; i<3; i++){
         var res=myContract.getMatch.call(i, 2000000,{from: web3.eth.accounts[0]});
@@ -72,7 +72,7 @@ function process1(k){
       }
       var sorted = mergeSort(answers);
       console.log("sorted: " + sorted);
-      myContract.query(k, 2000000, {from: web3.eth.accounts[0]});
+      myContract.query(0, 2000000, {from: web3.eth.accounts[0]});
     }
     else {
       console.log("same block number!");
@@ -84,7 +84,7 @@ function process1(k){
 
 function process2(){
 
-  
+
   var asking = myContract.asking({}, {fromBlock: 'latest', toBlock: 'latest'});
   asking.watch((error, eventResult) => {
     if (error)
