@@ -1,4 +1,4 @@
-pragma solidity ^0.4.9;
+/*pragma solidity ^0.4.9;
 
 contract Test1{
 
@@ -26,7 +26,7 @@ contract Test1{
   function getMatch(uint m) returns (uint){
     return (matches[m]);
   }
-}
+}*/
 
 
 
@@ -34,7 +34,7 @@ contract Test1{
 
 
 
-/*pragma solidity ^0.4.9;
+pragma solidity ^0.4.9;
 
 contract Test1{
 
@@ -60,7 +60,7 @@ contract Test1{
 
   function response(uint h, uint s){
     matches.push(Comp(h, s, msg.sender));
-    if (matches.length>4){
+    if (matches.length>2){
       responding();
     }
   }
@@ -68,4 +68,4 @@ contract Test1{
   function getMatch(uint m) returns (uint, uint, address){
     return (matches[m].hardware, matches[m].software, matches[m].sender);
   }
-}*/
+}

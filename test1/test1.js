@@ -26,8 +26,6 @@ var args = process.argv.slice(2);
 var currentBlock1 =0;
 var currentBlock2 =0;
 
-
-
 module.exports = function(callback) {};
 createWorkBook();
 setProv(args[0]);
@@ -65,8 +63,9 @@ function process1(){
 
         for(var i=0; i<3; i++){
         var res=myContract.getMatch.call(i, 2000000,{from: web3.eth.accounts[0]});
-        answers[i]=parseInt(res);
+        answers[i]=parseInt(res[0]);
         console.log("answer from call: " + res);
+        console.log("the answers array: " + answers);
         //console.log("i= " +res );
 
       }
@@ -83,8 +82,6 @@ function process1(){
 
 
 function process2(){
-
-
   var asking = myContract.asking({}, {fromBlock: 'latest', toBlock: 'latest'});
   asking.watch((error, eventResult) => {
     if (error)
@@ -98,7 +95,7 @@ function process2(){
         currentBlock2=eventResult.blockNumber;
         //k=Math.floor(Math.random() * (10 - 1 + 1)) + 1;        //k++;
         k=matchingAlgo(k)
-          myContract.response(k, 2000000, {from: web3.eth.accounts[0]});
+          myContract.response(k, 0, 2000000, {from: web3.eth.accounts[0]});
         }
         else {
           console.log("same block number!");
@@ -106,44 +103,6 @@ function process2(){
     }
   });
 }
-
-function mergeSort(arr)
-{
-  console.log("array: " + arr);
-    if (arr.length < 2)
-        return arr;
-
-    var middle = parseInt(arr.length / 2);
-    var left   = arr.slice(0, middle);
-    var right  = arr.slice(middle, arr.length);
-
-    return merge(mergeSort(left), mergeSort(right));
-}
-
-function merge(left, right)
-{
-    var result = [];
-
-    while (left.length && right.length) {
-        if (left[0] <= right[0]) {
-            result.push(left.shift());
-        } else {
-            result.push(right.shift());
-        }
-    }
-
-    while (left.length)
-        result.push(left.shift());
-
-    while (right.length)
-        result.push(right.shift());
-
-
-console.log("result: " + result);
-    return result;
-}
-
-
 
 function createWorkBook(){
   if (typeof require !== 'undefined') XLSX = require('/usr/lib/node_modules/xlsx');
@@ -189,10 +148,48 @@ function matchingAlgo(number){
 
 
 
+function combination(h, s, a){
+  this.hardware=h;
+  this.software=s;
+  this.address=a;
+}
 
 
+function mergeSort(arr)
+{
+  console.log("array: " + arr);
+    if (arr.length < 2)
+        return arr;
+
+    var middle = parseInt(arr.length / 2);
+    var left   = arr.slice(0, middle);
+    var right  = arr.slice(middle, arr.length);
+
+    return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right)
+{
+    var result = [];
+
+    while (left.length && right.length) {
+        if (left[0] <= right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+
+    while (left.length)
+        result.push(left.shift());
+
+    while (right.length)
+        result.push(right.shift());
 
 
+console.log("result: " + result);
+    return result;
+}
 
 
 
