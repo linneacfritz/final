@@ -1,9 +1,9 @@
 pragma solidity ^0.4.9;
 
-contract Test1{
+contract Test2{
 
 
-  function Test1() payable {
+  function Test2() payable {
   }
 
   struct Comp{

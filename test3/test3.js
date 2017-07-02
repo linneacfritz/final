@@ -14,8 +14,8 @@ const ports=["http://localhost:8545",
 "http://localhost:8554"];
 
 
-var contractAddress = fs.readFileSync('/home/linnea/test1/test1_addressInfo.txt','utf8');
-var contractABI = fs.readFileSync('/home/linnea/test1/test1_abi.txt','utf8');
+var contractAddress = fs.readFileSync('/home/linnea/test3/test3_addressInfo.txt','utf8');
+var contractABI = fs.readFileSync('/home/linnea/test3/test3_abi.txt','utf8');
 var contract = web3.eth.contract(JSON.parse(contractABI));
 var myContract = contract.at(contractAddress);
 var workbook;

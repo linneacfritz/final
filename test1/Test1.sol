@@ -1,39 +1,3 @@
-/*pragma solidity ^0.4.9;
-
-contract Test1{
-
-
-  function Test1() payable {
-  }
-
-  uint[] matches;
-  event asking (address sender, uint q);
-  event responding ();
-
-
-  function query(uint q){
-    delete matches;
-    asking(msg.sender, q);
-  }
-
-  function response(uint r){
-    matches.push(r);
-    if (matches.length >2){
-      responding();
-    }
-  }
-
-  function getMatch(uint m) returns (uint){
-    return (matches[m]);
-  }
-}*/
-
-
-
-
-
-
-
 pragma solidity ^0.4.9;
 
 contract Test1{
@@ -60,7 +24,7 @@ contract Test1{
 
   function response(uint h, uint s){
     matches.push(Comp(h, s, msg.sender));
-    if (matches.length>2){
+    if (matches.length>3){
       responding();
     }
   }
