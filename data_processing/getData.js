@@ -22,6 +22,7 @@ var args = process.argv.slice(2);
 //var currentBlock1 =0;
 //var currentBlock2 =0;
 var logFile = '/home/linnea/data_processing/logFile.txt'
+var timeStampLog = '/home/linnea/data_processing/timeStampLog.txt'
 
 
 module.exports = function(callback) {};
@@ -39,7 +40,8 @@ function setProv(n){
   web3.setProvider(new web3.providers.HttpProvider(ports[n-1]));
 }
 
-findLogs();
+//findLogs();
+timestamps();
 
 
 
@@ -85,3 +87,12 @@ function findLogs(){
       })
     }
   }
+
+  function timestamps(){
+      var counter = 0;
+      for (var i = 5617; i<10804; i++){
+        web3.eth.getBlock(i, true, function(error, block){
+          fs.appendFileSync(timeStampLog, ('\n' + block.timestamp));
+        })
+      }
+    }
