@@ -20,41 +20,22 @@ var contract = web3.eth.contract(JSON.parse(contractABI));
 var myContract = contract.at(contractAddress);
 var workbook;
 var sheet_name_list;
-var node_exists = true;
-var counter =0;
 var args = process.argv.slice(2);
 var currentBlock1 =0;
 var currentBlock2 =0;
 
 
 module.exports = function(callback) {};
-//startTimer();
 createWorkBook();
 setProv(args[0]);
-//test(web3.eth.blockNumber);
 startProgram(args[0]);
-//waitThreeSeconds();
+
+
 function Combination(h, s, a){
   this.hardware=h;
   this.software=s;
   this.address=a;
 }
-
-// answers[0] = new Combination(4, 3, 1);
-// answers[1] = new Combination(4, 5, 6);
-// answers[2] = new Combination(5, 5, 5);
-// answers[3] = new Combination(5, 5, 5);
-// answers[4] = new Combination(1, 2, 3);
-// answers[5] = new Combination(5, 5, 5);
-// answers[6] = new Combination(9, 88, 15);
-// answers[7] = new Combination(9, 5, 9);
-// answers[8] = new Combination(9, 1, 1);
-// answers[9] = new Combination(9, 2, 2);
-
-// var answers = mergeSort(answers);
-// console.log(answers);
-//
-// console.log(findBestCombination());
 
 function setProv(n){
   web3.setProvider(new web3.providers.HttpProvider(ports[n-1]));
@@ -62,16 +43,16 @@ function setProv(n){
 
 function startProgram(clientNumber){
   if (clientNumber==1) {
-    process1(0);
+    process1('latest');
   }
   else {
     process2();
   }
 }
 
-function process1(){
+function process1(fb){
   myContract.query(0, 2000000, {from: web3.eth.accounts[0]});
-  var responding = myContract.responding({}, {fromBlock: 'latest', toBlock: 'latest'});
+  var responding = myContract.responding({}, {fromBlock: fb, toBlock: 'latest'});
   responding.watch((error, eventResult) => {
     if (error)
     console.log('Error: ' + error);
@@ -89,12 +70,12 @@ function process1(){
         console.log("Answers: " + JSON.stringify(answers) + '\n');
         answers = mergeSort(answers);
         findBestCombination(answers);
-
+        waitTwentySeconds();
         myContract.query(0, 2000000, {from: web3.eth.accounts[0]});
       }
       else {
         console.log("same block number!");
-        waitTwentySeconds();
+        waitTwentySeconds(currentBlock1);
       }
     }
   });
@@ -166,7 +147,6 @@ function matchingAlgo(number){
 
 function mergeSort(arr)
 {
-  //console.log(arr[0].hardware + " " + arr[0].software + " " + arr[0].address)
   if (arr.length < 2)
   return arr;
 
@@ -194,8 +174,6 @@ function merge(left, right)
 
   while (right.length)
   result.push(right.shift());
-
-  //console.log("results: " + result[0].hardware + " " + result[0].software + " " + result[0].address);
 
   return result;
 }
@@ -244,7 +222,10 @@ function sleep (time) {
 }
 
 function waitTwentySeconds(){
+  console.log("waiting!");
 sleep(20000).then(() => {
-      process1();
+  console.log("waited!");
+      // currentBlock1=0;
+      // process1(block);
 });
 }
