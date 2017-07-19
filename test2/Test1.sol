@@ -1,9 +1,9 @@
 pragma solidity ^0.4.9;
 
-contract Test2{
+contract Test1{
 
 
-  function Test2() payable {
+  function Test1() payable {
   }
 
   struct Comp{
@@ -24,7 +24,7 @@ contract Test2{
 
   function response(uint h, uint s){
     matches.push(Comp(h, s, msg.sender));
-    if (matches.length>4){
+    if (matches.length>3){
       responding();
     }
   }

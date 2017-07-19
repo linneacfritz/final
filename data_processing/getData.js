@@ -13,15 +13,8 @@ const ports=["http://localhost:8545",
 "http://localhost:8553",
 "http://localhost:8554"];
 
-
-//var contractAddress = fs.readFileSync('/home/linnea/test1/test1_addressInfo.txt','utf8');
-//var contractABI = fs.readFileSync('/home/linnea/test1/test1_abi.txt','utf8');
-//var contract = web3.eth.contract(JSON.parse(contractABI));
-//var myContract = contract.at(contractAddress);
 var args = process.argv.slice(2);
-//var currentBlock1 =0;
-//var currentBlock2 =0;
-var logFile = '/home/linnea/data_processing/logFile.txt'
+var logFile = '/home/linnea/data_processing/logFile2.txt'
 var timeStampLog = '/home/linnea/data_processing/timeStampLog.txt'
 
 
@@ -40,21 +33,15 @@ function setProv(n){
   web3.setProvider(new web3.providers.HttpProvider(ports[n-1]));
 }
 
-//findLogs();
+findLogs();
 timestamps();
 
 
 
 function findLogs(){
   var counter = 0;
-  for (var i = 5617; i<10804; i++){
+  for (var i = 11000; i<11700; i++){
     web3.eth.getBlock(i, true, function(error, block){
-      //if(!error){
-      //if (result.gasUsed>0){
-      //counter++;}
-      //fs.appendFileSync(logFile, '\n\n'+JSON.stringify(result));
-      //fs.appendFileSync(logFile, '\n' + result.timestamp);
-      //fs.appendFileSync(logFile, '\n COUNTER: ' + counter);
       if(block.transactions.length>0){
         counter++;
         fs.appendFileSync(logFile, (
@@ -79,10 +66,6 @@ function findLogs(){
           + " timestamp       : " + block.timestamp + "\n"
           + " transactions    : " + JSON.stringify(block.transactions) + "\n"
           + " uncles          : " + block.uncles) + '\n');
-          //if (block.transactions != null) {
-          //console.log("--- transactions ---");
-          //block.transactions.forEach( function(e) {
-          //printTransaction(e);
         }
       })
     }
