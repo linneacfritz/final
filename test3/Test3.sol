@@ -7,9 +7,8 @@ contract Test3{
   }
 
   struct Comp{
-    uint hardware;
-    uint software;
-    address sender;
+    int hardware;
+    int software;
   }
 
   Comp[] matches;
@@ -22,14 +21,14 @@ contract Test3{
     asking(msg.sender, q);
   }
 
-  function response(uint h, uint s){
-    matches.push(Comp(h, s, msg.sender));
-    if (matches.length>4){
+  function response(int h, int s){
+    matches.push(Comp(h, s));
+    if (matches.length>3){
       responding();
     }
   }
 
-  function getMatch(uint m) returns (uint, uint, address){
-    return (matches[m].hardware, matches[m].software, matches[m].sender);
+  function getMatch(uint m) returns (int, int){
+    return (matches[m].hardware, matches[m].software);
   }
 }
