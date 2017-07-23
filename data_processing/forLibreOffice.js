@@ -4,7 +4,7 @@ allA();
 
 function allA(){
 
-    for (var i = 0; i<5187; i++){
+    for (var i = 0; i<5883; i++){
         fs.appendFileSync(libretext, ('\n=A'+i+'-B'+i));
       }
   }

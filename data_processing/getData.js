@@ -16,6 +16,8 @@ const ports=["http://localhost:8545",
 var args = process.argv.slice(2);
 var logFile = '/home/linnea/data_processing/logFile2.txt'
 var timeStampLog = '/home/linnea/data_processing/timeStampLog.txt'
+var timeStampLog2 = '/home/linnea/data_processing/timeStampLog2.txt'
+
 
 
 module.exports = function(callback) {};
@@ -33,7 +35,7 @@ function setProv(n){
   web3.setProvider(new web3.providers.HttpProvider(ports[n-1]));
 }
 
-findLogs();
+//findLogs();
 timestamps();
 
 
@@ -73,9 +75,22 @@ function findLogs(){
 
   function timestamps(){
       var counter = 0;
-      for (var i = 5617; i<10804; i++){
+      for (var i = 13644; i<17000; i++){
+        //console.log(i);
         web3.eth.getBlock(i, true, function(error, block){
-          fs.appendFileSync(timeStampLog, ('\n' + block.timestamp));
+          //console.log(i);
+          fs.appendFileSync(timeStampLog2, ('\n' + block.timestamp));
         })
       }
     }
+
+  // function timestamps(){
+  //     var counter = 0;
+  //     for (var i = 14000; i<14005; i++){
+  //       //console.log(i);
+  //       var stamp= web3.eth.getBlock(i).timestamp
+  //         console.log(stamp);
+  //         //fs.appendFileSync(timeStampLog2, ('\n' + web3.eth.getBlock(i).timestamp));
+  //       }
+  //
+  //   }
